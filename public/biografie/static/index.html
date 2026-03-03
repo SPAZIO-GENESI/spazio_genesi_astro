@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Ricostruisci pagina artista</title>
+  <style>
+    body { font-family: sans-serif; margin: 2rem; }
+    select, button { padding: 0.5rem; font-size: 1rem; }
+  </style>
+</head>
+<body>
+  <h1>Ricostruisci pagina artista</h1>
+
+  <label for="artista">Seleziona artista:</label>
+  <select id="artista"></select>
+  <button id="run">Ricostruisci</button>
+
+  <p id="status"></p>
+
+  <script>
+    const selectEl = document.getElementById('artista');
+    const statusEl = document.getElementById('status');
+
+    // Carica lista artisti
+    fetch('https://spaziogenesi.org/biografie/static/artisti.json')
+      .then(r => r.json())
+      .then(data => {
+        selectEl.innerHTML = '';
+        Object.keys(data).forEach(id => {
+          const opt = document.createElement('option');
+          opt.value = id;
+          opt.textContent = data[id].nome || id;
+          selectEl.appendChild(opt);
+        });
+      });
+
+    document.getElementById('run').addEventListener('click', async () => {
+      const artista = selectEl.value;
+      statusEl.textContent = "Lancio workflow per " + artista + "...";
+
+      // API GitHub Actions: workflow_dispatch
+      const owner = "SPAZIO-GENESI";
+      const repo = "spazio_genesi"; // <-- sostituisci con il nome del repo principale
+      const workflow_id = "ricostruisci_artista.yml"; // nome file workflow
+      const token = "PAT_TOKEN"; // meglio salvarlo come secret e iniettare
+
+      const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/actions/workflows/${workflow_id}/dispatches`, {
+        method: "POST",
+        headers: {
+          "Authorization": `token ${token}`,
+          "Accept": "application/vnd.github+json"
+        },
+        body: JSON.stringify({
+          ref: "main", // branch su cui gira la Action
+          inputs: { artista }
+        })
+      });
+
+      if (res.ok) {
+        statusEl.textContent = "Workflow avviato per " + artista;
+      } else {
+        statusEl.textContent = "Errore: " + res.status;
+      }
+    });
+  </script>
+</body>
+</html>
