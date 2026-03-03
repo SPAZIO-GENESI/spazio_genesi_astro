@@ -1,0 +1,11 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /private/
+Disallow: /ignore/
+Allow: /
+
+User-Agent: Googlebot
+Allow: /.js$
+Allow: /.css$
+
+Sitemap: https://spaziogenesi.org/sitemap.xml
