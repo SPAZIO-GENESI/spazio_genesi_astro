@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+const basePath = import.meta.env.BASE_URL; // Qui possiamo usare import.meta.env
 ---
 
 <Base
@@ -8,17 +9,17 @@ import Base from '../layouts/Base.astro';
 >
 
         <div class="cover-container d-flex  p-3 mx-auto flex-column">
-<header class="masthead mb-auto">
-  <div class="inner">
-    <h3 class="masthead-brand">Spazio Genesi</h3>
-    <nav class="nav nav-masthead justify-content-center">
-      <a class="nav-link" href="/">Home</a>
-      <a class="nav-link active" href="/chisiamo/" aria-current="page">Chi siamo</a>
-      <a class="nav-link" href="/biografie/">Biografie</a>
-      <a class="nav-link" href="/archivio/">Archivio</a>
-    </nav>
-  </div>
-</header>
+          <header class="masthead mb-auto">
+            <div class="inner">
+              <h3 class="masthead-brand">Spazio Genesi</h3>
+                <nav class="nav nav-masthead justify-content-center">
+                  <a class="nav-link" href={`${basePath}/`}>Home</a>
+                  <a class="nav-link active" href={`${basePath}/chisiamo/`} aria-current="page">Chi siamo</a>
+                  <a class="nav-link" href={`${basePath}/biografie/`}>Biografie</a>
+                  <a class="nav-link" href={`${basePath}/archivio/`}>Archivio</a>
+                </nav>
+            </div>
+          </header>
 
             <main role="main" class="inner cover">
 
