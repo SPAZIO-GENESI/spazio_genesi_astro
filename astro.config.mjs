@@ -1,7 +1,6 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 
-
 const isGithub = process.env.GITHUB_ACTIONS === 'true';
 
 export default defineConfig({
@@ -15,4 +14,9 @@ export default defineConfig({
 
   trailingSlash: "always",
   
+  // IMPORTANTE: Configurazione per gestire i path assoluti
+  build: {
+    assets: '_astro',
+    format: 'file'
+  }
 });

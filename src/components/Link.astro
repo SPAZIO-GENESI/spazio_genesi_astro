@@ -1,0 +1,27 @@
+---
+// src/components/Link.astro
+const { href, ...props } = Astro.props;
+
+// Funzione per gestire i path in base all'ambiente
+const getCorrectPath = (path) => {
+  const isGithub = process.env.GITHUB_ACTIONS === 'true';
+  
+  // Se è già un URL assoluto o inizia con http, lascia invariato
+  if (path.startsWith('http') || path.startsWith('//')) {
+    return path;
+  }
+  
+  // Se siamo su GitHub Pages, aggiungi il base path ai link interni
+  if (isGithub && path.startsWith('/')) {
+    return `/spazio_genesi_astro${path}`;
+  }
+  
+  return path;
+};
+
+const correctHref = getCorrectPath(href);
+---
+
+<a href={correctHref} {...props}>
+  <slot />
+</a>

@@ -1,0 +1,32 @@
+---
+// src/components/NavLink.astro
+export interface Props {
+  href: string;
+  title: string;
+  isActive?: boolean;
+}
+
+const { href, title, isActive = false } = Astro.props;
+const isGithub = process.env.GITHUB_ACTIONS === 'true';
+
+// Determina se è una pagina Astro o HTML statica
+const isAstroPage = href === '/chisiamo/';
+
+// Costruisci il path corretto
+const getCorrectPath = () => {
+  // Se non siamo su GitHub, path normale
+  if (!isGithub) return href;
+  
+  // Su GitHub, aggiungi il base path
+  return `/spazio_genesi_astro${href}`;
+};
+
+const path = getCorrectPath();
+---
+
+<a 
+  href={path}
+  class:list={['nav-link', isActive && 'active']}
+>
+  {title}
+</a>
