@@ -17,6 +17,6 @@ export default defineConfig({
   // IMPORTANTE: Configurazione per gestire i path assoluti
   build: {
     assets: '_astro',
-    format: 'file'
+    format: 'directory',
   }
 });
