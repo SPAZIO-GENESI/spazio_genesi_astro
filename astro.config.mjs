@@ -14,6 +14,7 @@ export default defineConfig({
 
   trailingSlash: "always",
   
+  
   // IMPORTANTE: Configurazione per gestire i path assoluti
   build: {
     assets: '_astro',
