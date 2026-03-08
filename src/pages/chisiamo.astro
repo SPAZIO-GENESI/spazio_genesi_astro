@@ -13,10 +13,10 @@ import Base from "../layouts/Base.astro";
               <div class="inner">
                 <h3 class="masthead-brand">Spazio Genesi</h3>
                 <nav class="nav nav-masthead justify-content-center">
-                  <a class="nav-link" href="/">Home</a>
-                  <a class="nav-link active" href="/chisiamo/">Chi siamo</a>
-                  <a class="nav-link" href="/biografie/">Biografie</a>
-                  <a class="nav-link" href="/archivio/">Archivio</a>
+                  <a class="nav-link" href={`${Astro.base}/`}>Home</a>
+                  <a class="nav-link" href={`${Astro.base}/chisiamo/`}>Chi siamo</a>
+                  <a class="nav-link" href={`${Astro.base}/biografie/`}>Biografie</a>
+                  <a class="nav-link" href={`${Astro.base}/archivio/`}>Archivio</a>
                 </nav>
               </div>
             </header>

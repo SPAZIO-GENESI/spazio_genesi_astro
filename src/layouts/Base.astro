@@ -18,7 +18,9 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
 
   <title>{title}</title>
   <meta name="description" content={description}>
-  <link rel="canonical" href={canonical} />
+  <script>
+    const canonical = Astro.site + (Astro.url?.pathname || '/');
+  </script>
 
   <meta name="author" content="Tangram.page">
 
