@@ -68,8 +68,8 @@ if (artist.img?.length) {
     />
 
     <!-- CSS locali -->
-    <link href={Astro.base + 'cover.css'} rel="stylesheet" />
-    <link href={Astro.base + 'biografie/bio.css'} rel="stylesheet" />
+    <link href={`${Astro.base ?? '/'}cover.css`} rel="stylesheet" />
+    <link href={`${Astro.base ?? '/'}biografie/bio.css`} rel="stylesheet" />
 
     <meta
       name="description"
@@ -173,7 +173,7 @@ if (artist.img?.length) {
                 {/* Immagine */}
                 {image.img && (
                   <img
-                    src={Astro.base + 'biografie/' + artist.cartella + '/' + image.img}
+                    src={`${Astro.base ?? '/'}biografie/${artist.cartella}/${image.img}`}
                     alt={image.des ?? ""}
                     class="img-fluid w-100"
                     loading="lazy"
@@ -182,10 +182,7 @@ if (artist.img?.length) {
 
                 {/* Descrizione lunga */}
                 {image.deslunga && (
-                  <p
-                    class="regdiv text-justify mt-2"
-                    set:html={image.deslunga}
-                  ></p>
+                  <p class="regdiv text-justify mt-2" set:html={image.deslunga}></p>
                 )}
               </article>
             ))}
