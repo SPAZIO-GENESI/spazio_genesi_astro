@@ -1,25 +1,18 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 
-const isGithub = process.env.GITHUB_ACTIONS === 'true';
-
 export default defineConfig({
-  site: isGithub
-    ? 'https://spazio-genesi.github.io/spazio_genesi_astro'
-    : 'https://spaziogenesi.org',
+  site: 'https://spazio-genesi.github.io/spazio_genesi_astro',
 
-  base: isGithub
-    ? '/spazio_genesi_astro/' // necessario per GitHub Pages
-    : '/',
+  // necessario perché il sito è pubblicato nella sottocartella del repo
+  base: '/spazio_genesi_astro/',
 
   trailingSlash: "always",
 
   build: {
-    format: 'directory',   // compatibile con GitHub Pages
-    // publicDir: 'public', // opzionale, default già 'public'
+    format: 'directory',
   },
 
-  // Config per import path assoluti
   vite: {
     resolve: {
       alias: {
