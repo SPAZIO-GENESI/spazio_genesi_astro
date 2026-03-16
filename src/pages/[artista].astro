@@ -68,8 +68,8 @@ if (artist.img?.length) {
     />
 
     <!-- CSS locali -->
-    <link href={`${base}cover.css`} rel="stylesheet" />
-    <link href={`${base}biografie/bio.css`} rel="stylesheet" />
+    <link href={Astro.base + 'cover.css'} rel="stylesheet" />
+    <link href={Astro.base + 'biografie/bio.css'} rel="stylesheet" />
 
     <meta
       name="description"
@@ -166,24 +166,30 @@ if (artist.img?.length) {
               )}
             </div>
 
-            <!-- Right Column: immagini -->
-            <div class="col-md-6 col-12 text-justify">
-              {flatImages.map((image, index) => (
-                <article class="mb-4" id={`img${index + 1}`}>
-                  {image.img && (
-                    <img
-                      src={`${base}biografie/${artist.cartella}/${image.img}`}
-                      alt={image.des ?? ""}
-                      class="img-fluid w-100"
-                      loading="lazy"
-                    />
-                  )}
-                  {image.deslunga && (
-                    <p class="regdiv text-justify mt-2" set:html={image.deslunga}></p>
-                  )}
-                </article>
-              ))}
-            </div>
+          <!-- Right Column: immagini -->
+          <div class="col-md-6 col-12 text-justify">
+            {flatImages.map((image, index) => (
+              <article class="mb-4" id={`img${index + 1}`}>
+                {/* Immagine */}
+                {image.img && (
+                  <img
+                    src={Astro.base + 'biografie/' + artist.cartella + '/' + image.img}
+                    alt={image.des ?? ""}
+                    class="img-fluid w-100"
+                    loading="lazy"
+                  />
+                )}
+
+                {/* Descrizione lunga */}
+                {image.deslunga && (
+                  <p
+                    class="regdiv text-justify mt-2"
+                    set:html={image.deslunga}
+                  ></p>
+                )}
+              </article>
+            ))}
+          </div>
           </div>
         </div>
       </main>
